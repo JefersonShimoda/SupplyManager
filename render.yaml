@@ -1,0 +1,45 @@
+databases:
+  - name: supplymanager-db
+    plan: free
+    databaseName: supply_manager
+    user: supplymanager
+
+services:
+  - type: web
+    name: supplymanager-api
+    runtime: docker
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: supplymanager-db
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: supplymanager-db
+          property: port
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: supplymanager-db
+          property: database
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: supplymanager-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: supplymanager-db
+          property: password
+      - key: CORS_ORIGIN
+        value: https://supplymanager-frontend.onrender.com
+
+  - type: web
+    name: supplymanager-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://supplymanager-api.onrender.com/api
