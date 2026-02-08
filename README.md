@@ -1,4 +1,5 @@
 # SupplyManager
+<<<<<<< HEAD
 
 Supply management and production suggestion system. Register products, raw materials, define compositions and get production suggestions based on available stock.
 
@@ -26,3 +27,6 @@ Supply management and production suggestion system. Register products, raw mater
 | GET/POST | `/api/products/{id}/raw-materials` | List / associate raw materials to a product |
 | PUT/DELETE | `/api/products/{id}/raw-materials/{rmId}` | Update / remove association |
 | GET | `/api/production/suggestion` | Production suggestion (greedy algorithm) |
+=======
+Full-stack supply management system with stock-based production suggestions. Built with Spring Boot, React and PostgreSQL
+>>>>>>> f14c74afa0f3b88dbf35b9bf26f4dc7cb84b1261
